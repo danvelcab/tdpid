@@ -1,0 +1,13 @@
+import sys
+sys.path.append("C:\Users\Daniel\Desktop\SOFTWARE\PID\TD")
+import Otsu
+data = slicer.util.array("foto")
+Otsu.optimal_threshold(data)
+
+
+import sys
+sys.path.append("C:\Users\Daniel\Desktop\SOFTWARE\PID\TD")
+import Otsu
+b = qt.QPushButton('Otsu')
+b.connect('clicked()',Otsu.button_apply_otsu)
+b.show()
