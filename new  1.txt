@@ -6,7 +6,7 @@ Otsu.optimal_threshold(data)
 
 
 import sys
-sys.path.append("C:\Users\Daniel\Desktop\SOFTWARE\PID\TD")
+sys.path.append("C:\\Users\\Daniel\\Desktop\\SOFTWARE\\PID\TD\\tdpid")
 import Otsu
 b = qt.QPushButton('Otsu')
 b.connect('clicked()',Otsu.button_apply_otsu)

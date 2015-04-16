@@ -7,10 +7,9 @@ def button_apply_otsu():
 	import Otsu
 	import sys
 	sys.path.append("C:\Users\Daniel\Desktop\SOFTWARE\PID\TD")
-	n = slicer.util.getNode('foto')
-	data = slicer.util.array('foto')
+	n = slicer.util.getNode('MRHead')
+	data = slicer.util.array('MRHead')
 	max = Otsu.optimal_threshold(data)
-	print 'MAAAXIMO' + str(max)
 	data = apply_threshold(data,max)
 	n.GetImageData().Modified()
 	
@@ -38,7 +37,6 @@ def optimal_threshold(data):
 	variance_array = numpy.zeros(255) 
 	for gray_level in range(1,255):
 		variance_array[gray_level] = calc_variance(data, histogram, gray_level, total_mean_level)
-		print str(gray_level)
 	
 	print "variance_array " + str(variance_array)
 	print "total_mean_level " + str(total_mean_level)
@@ -56,13 +54,12 @@ def numpy_indexof(array, x):
 def calc_mean_level(data, histogram, max_gray_level):
 	result = 0
 	for i in xrange(max_gray_level):
-		result += (i+1) * (float(histogram[i]) / (len(data[0]) * len(data[0][0])))
+		result += (i+1) * (float(histogram[i]) / (len(data) * len(data[0]) * len(data[0][0])))
 		
 	return result
 	
 def calc_variance(data, histogram, gray_level, total_mean_level):
 	w_t = calc_probability_up_to(data, histogram, gray_level)
-	
 	a = pow(total_mean_level * w_t - calc_mean_level(data, histogram, gray_level), 2)
 	b = w_t * (1 - w_t)
 	
@@ -71,7 +68,7 @@ def calc_variance(data, histogram, gray_level, total_mean_level):
 def calc_probability_up_to(data, histogram, gray_level):
 	result = 0
 	for i in xrange(gray_level):
-		result += (float(histogram[i]) / (len(data[0]) * len(data[0][0])))
+		result += (float(histogram[i]) / (len(data) * len(data[0]) * len(data[0][0])))
 		
 	return result
 	
